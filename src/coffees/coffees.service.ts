@@ -3,6 +3,7 @@ import { CreateCoffeeInput } from './dto/create-coffee.input';
 
 @Injectable()
 export class CoffeesService {
+
     async findAll() {
         return [];
     }

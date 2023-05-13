@@ -4,6 +4,7 @@ import { CoffeesService } from './coffees.service';
 import { CreateCoffeeInput } from './dto/create-coffee.input';
 import { Coffee } from './entities/coffee.entity';
 
+// A resolver is similar to a controller
 @Resolver()
 export class CoffeesResolver {
 
@@ -14,11 +15,15 @@ export class CoffeesResolver {
         return await this.coffeesService.findAll();
     }
 
+    // @Args to pass arguments
+    // ParseIntPipe: takes a 'string' and parses it to an 'int'
+    // @Query is similar to GET request
     @Query(() => Coffee, { name: 'coffee', nullable: true })
     async findOne(@Args('id', { type: () => ID }, ParseIntPipe) id: number) {
         return await this.coffeesService.findOne(id);
     }
 
+    // @Mutation is used for POST/PUT/PATCH/Delete requests
     @Mutation(() => Coffee, { name: 'createCoffee', nullable: true })
     async create(@Args('createCoffeeInput') createCoffeeInput: CreateCoffeeInput) {
         return await this.coffeesService.create(createCoffeeInput);
