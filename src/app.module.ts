@@ -5,7 +5,6 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CoffeesModule } from './coffees/coffees.module';
-import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -19,7 +18,6 @@ import { UsersModule } from './users/users.module';
       //   numberScalarMode: 'integer'
       // }
     }),
-    UsersModule,
     CoffeesModule,
   ],
   controllers: [AppController],
