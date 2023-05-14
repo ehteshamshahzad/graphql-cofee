@@ -7,20 +7,22 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CoffeesModule } from './coffees/coffees.module';
 import { DateScalar } from './common/scalars/date.scalar';
-import { Tea } from './teas/tea.entity';
 import { DrinksResolver } from './drinks/drinks.resolver';
+import { PubSubModule } from './pub-sub/pub-sub.module';
+import { Tea } from './teas/tea.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'containers-us-west-28.railway.app',
-      port: 6169,
+      host: 'uhh',
+      port: 5432,
       username: 'postgres',
-      password: 'LoSbon1ECe0uQsI8zzwo',
-      database: 'railway',
+      password: 'password',
+      database: 'postgres',
       autoLoadEntities: true,
       synchronize: true,
+      logging: ['query']
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
@@ -35,9 +37,11 @@ import { DrinksResolver } from './drinks/drinks.resolver';
         numberScalarMode: 'integer',
         dateScalarMode: 'timestamp',
         orphanedTypes: [Tea]
-      }
+      },
+      installSubscriptionHandlers: true
     }),
     CoffeesModule,
+    PubSubModule,
   ],
   controllers: [AppController],
   providers: [AppService, DateScalar, DrinksResolver],
