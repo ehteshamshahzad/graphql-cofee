@@ -1,6 +1,7 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { Drink } from 'src/common/drink.interface';
 import { CoffeeType } from 'src/common/enum/coffee-type.enum';
+import { loggerMiddleware } from 'src/common/middleware/logger.middleware';
 import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryColumn } from 'typeorm';
 import { Flavor } from './flavor.entity';
 
@@ -14,9 +15,11 @@ export class Coffee implements Drink {
     id: number;
 
     @Column()
+    @Field({ middleware: [loggerMiddleware] })
     name: string;
 
     @Column()
+    @Field({ middleware: [loggerMiddleware] })
     brand: string;
 
     // @Column({ type: 'json' })
