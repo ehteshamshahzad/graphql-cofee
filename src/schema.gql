@@ -2,26 +2,44 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Flavor {
+  """Unique ID"""
+  id: ID!
+  name: String!
+  coffees: [Coffee!]!
+}
+
 type Coffee {
   """Unique ID"""
   id: ID!
   name: String!
   brand: String!
-  flavors: [String!]!
+  flavors: [Flavor!]
 }
 
 type Query {
   coffees: [Coffee!]!
-  coffee(id: ID!): Coffee
+  coffee(id: ID!): Coffee!
 }
 
 type Mutation {
-  createCoffee(createCoffeeInput: CreateCoffeeInput!): Coffee
+  createCoffee(createCoffeeInput: CreateCoffeeInput!): Coffee!
+  updateCoffee(id: ID!, updateCoffeeInput: UpdateCoffeeInput!): Coffee!
+  deleteCoffee(id: ID!): Coffee
 }
 
 input CreateCoffeeInput {
   """New coffee name"""
   name: String!
+  id: Float!
   brand: String!
   flavors: [String!]!
+}
+
+input UpdateCoffeeInput {
+  """New coffee name"""
+  name: String
+  id: Float
+  brand: String
+  flavors: [String!]
 }
