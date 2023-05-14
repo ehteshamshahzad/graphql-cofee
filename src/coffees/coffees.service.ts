@@ -16,7 +16,9 @@ export class CoffeesService {
     ) { }
 
     async findAll() {
-        return this.coffeesRepository.find();
+        return this.coffeesRepository.find(
+            // { select: { id: true, name: true, brand: true, flavors: true }, relations: { flavors: true } }
+        );
     }
 
     async findOne(id: number) {

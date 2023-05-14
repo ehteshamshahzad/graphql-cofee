@@ -6,15 +6,18 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CoffeesModule } from './coffees/coffees.module';
+import { DateScalar } from './common/scalars/date.scalar';
+import { Tea } from './teas/tea.entity';
+import { DrinksResolver } from './drinks/drinks.resolver';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'containers-us-west-10.railway.app',
-      port: 5503,
+      host: 'containers-us-west-28.railway.app',
+      port: 6169,
       username: 'postgres',
-      password: 'A8AhoXbQZORDm7RTOrZG',
+      password: 'LoSbon1ECe0uQsI8zzwo',
       database: 'railway',
       autoLoadEntities: true,
       synchronize: true,
@@ -28,10 +31,15 @@ import { CoffeesModule } from './coffees/coffees.module';
       // buildSchemaOptions: {
       //   numberScalarMode: 'integer'
       // }
+      buildSchemaOptions: {
+        numberScalarMode: 'integer',
+        dateScalarMode: 'timestamp',
+        orphanedTypes: [Tea]
+      }
     }),
     CoffeesModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, DateScalar, DrinksResolver],
 })
 export class AppModule { }
